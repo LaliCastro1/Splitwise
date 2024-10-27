@@ -20,7 +20,7 @@ class Gasto {
     }
 }
 
-// Crear usuarios para la aplicación
+// Crea usuarios para la aplicación
 const usuarios = [
     new Usuario('Bob Esponja', './img/usuarios/bob_esponja.png'),
     new Usuario('Calamardo', './img/usuarios/calamardo.png'),
@@ -32,7 +32,7 @@ function crearFormulario() {
     const formularioDiv = document.querySelector('#contenido-dos .cuerpo-acordeon');
     formularioDiv.innerHTML = ''; // Limpiar el contenido actual
 
-    // Crear y configurar el formulario
+    // Crea y configura el formulario
     const form = document.createElement('form');
     form.classList.add('mb-10');
 
@@ -69,7 +69,7 @@ function crearFormulario() {
     submitButton.textContent = 'Añadir Gasto';
     submitButton.classList.add('btn', 'btn-success', 'mt-3'); //bootstrap
 
-    // Añadir elementos al formulario y agregar evento
+    // Añade elementos al formulario y agregar evento
     form.append(usuariosSelect, tituloInput, importeInput, fechaInput, submitButton);
     formularioDiv.appendChild(form);
 
@@ -96,7 +96,7 @@ function validarFormulario(usuario, titulo, importe, fecha) {
     if (!titulo) {
         errores.push('Introduce un título');
         document.getElementById('titulo').classList.add('error'); // Campo incorrecto
-    } else if (!/^[A-Za-z0-9\s]{1,20}$/.test(titulo)) {
+    } else if (!/^[A-Za-z0-9\s]{1,20}$/.test(titulo)) {  //Lo he buscado
         errores.push('Título inválido');
         document.getElementById('titulo').classList.add('error'); // Campo incorrecto
     } else {
@@ -106,7 +106,7 @@ function validarFormulario(usuario, titulo, importe, fecha) {
     if (!importe) {
         errores.push('Introduce un importe');
         document.getElementById('importe').classList.add('error'); // Campo incorrecto
-    } else if (!/^(0|[1-9]\d{0,2})(\.\d{2})?$/.test(importe)) {
+    } else if (!/^(0|[1-9]\d{0,2})(\.\d{2})?$/.test(importe)) { //Lo he buscado
         errores.push('El importe no es válido. Debe estar entre 0.00 y 1000.00.');
         document.getElementById('importe').classList.add('error'); // Campo incorrecto
     } else if (parseFloat(importe) < 0 || parseFloat(importe) > 1000) {
@@ -119,7 +119,7 @@ function validarFormulario(usuario, titulo, importe, fecha) {
     if (!fecha) {
         errores.push('Introduce una fecha');
         document.getElementById('fecha').classList.add('error'); // Campo incorrecto
-    } else if (!/^\d{2}\/\d{2}\/\d{4}$/.test(fecha)) {
+    } else if (!/^\d{2}\/\d{2}\/\d{4}$/.test(fecha)) { //Lo he buscado
         errores.push('Fecha inválida. Debe tener el formato dd/mm/yyyy.');
         document.getElementById('fecha').classList.add('error'); // Campo incorrecto
     } else {
@@ -197,7 +197,6 @@ function actualizarResumen(usuario, gasto) {
     cardText.classList.add('card-text');
     cardText.textContent = `Pagó ${gasto.importe}€ el ${gasto.fecha}`; // Asignar el texto del gasto
 
-    // Estructurar el contenido
     cardBodyDiv.appendChild(cardTitle);
     cardBodyDiv.appendChild(cardText);
     colBodyDiv.appendChild(cardBodyDiv);
@@ -205,17 +204,16 @@ function actualizarResumen(usuario, gasto) {
     rowDiv.appendChild(colBodyDiv);
     tarjeta.appendChild(rowDiv);
 
-    // Agregar la tarjeta al resumen
     resumenDiv.appendChild(tarjeta);
 }
 
 
-// Calcular el total que gasta un usuario 
+// Calcula el total que gasta un usuario 
 function obtenerTotalGastado(usuario) {
     return usuario.gastos.reduce((total, gasto) => total + parseFloat(gasto.importe), 0);
 }
 
-// Actualizar el resumen de cuentas
+// Actualiza el resumen de cuentas
 function actualizarCuentas() {
     const cuentasDiv = document.querySelector('#contenido-tres .cuerpo-acordeon');
     cuentasDiv.innerHTML = ''; // Limpiar el contenido actual
@@ -231,7 +229,7 @@ function actualizarCuentas() {
         const tarjeta = document.createElement('div');
         tarjeta.classList.add('tarjeta', 'mb-12', 'espacio');
 
-        // Crear la estructura de la tarjeta
+        // Crea la estructura de la tarjeta
         const rowDiv = document.createElement('div');
         rowDiv.classList.add('row', 'g-0');
 
@@ -241,7 +239,7 @@ function actualizarCuentas() {
         const img = document.createElement('img');
         img.src = usuario.pathImg;
         img.classList.add('img-fluid', 'rounded-start');
-        colImgDiv.appendChild(img); // Agregar imagen a su columna
+        colImgDiv.appendChild(img); // Agrega imagen a su columna
 
         const colBodyDiv = document.createElement('div');
         colBodyDiv.classList.add('col-md-10');
@@ -251,17 +249,16 @@ function actualizarCuentas() {
 
         const cardTitle = document.createElement('h5');
         cardTitle.classList.add('card-title');
-        cardTitle.textContent = usuario.nombre; // Asignar el nombre del usuario
+        cardTitle.textContent = usuario.nombre; // Asigna el nombre del usuario
 
         const pagadoText = document.createElement('p');
         pagadoText.classList.add('card-text');
-        pagadoText.textContent = `Ha pagado ${totalPagado}€`; // Asignar el texto de total pagado
+        pagadoText.textContent = `Ha pagado ${totalPagado}€`; // Asigna el texto de total pagado
 
         const deudaText = document.createElement('p');
         deudaText.classList.add('card-text');
-        deudaText.textContent = `Deuda: ${debe.toFixed(2)}€`; // Asignar el texto de deuda
+        deudaText.textContent = `Deuda: ${debe.toFixed(2)}€`; // Asigna el texto de deuda
 
-        // Estructurar el contenido
         cardBodyDiv.appendChild(cardTitle);
         cardBodyDiv.appendChild(pagadoText);
         cardBodyDiv.appendChild(deudaText);
@@ -270,7 +267,6 @@ function actualizarCuentas() {
         rowDiv.appendChild(colBodyDiv);
         tarjeta.appendChild(rowDiv);
 
-        // Agregar la tarjeta al resumen
         cuentasDiv.appendChild(tarjeta);
     });
 }
@@ -278,25 +274,25 @@ function actualizarCuentas() {
 
 // Función para calcular la deuda de un usuario
 function calcularDeuda(usuario) {
-    // Calcular el total de gastos acumulados por todos los usuarios
+    // Calcula el total de gastos acumulados por todos los usuarios
     const totalGastosAcumulados = usuarios.reduce((sumaTotal, usuarioActual) => {
-        // Sumar todos los gastos de cada usuario individual
+        // Suma todos los gastos de cada usuario individual
         return sumaTotal + usuarioActual.gastos.reduce((sumaGastos, gastoActual) => {
-            return sumaGastos + parseFloat(gastoActual.importe); // Sumar el importe del gasto actual
+            return sumaGastos + parseFloat(gastoActual.importe); // Suma el importe del gasto actual
         }, 0);
     }, 0);
 
-    // Calcular el promedio de gastos por usuario
+    // Calcula el promedio de gastos por usuario
     const promedioGastosPorUsuario = totalGastosAcumulados / usuarios.length;
 
-    // Calcular la deuda del usuario
+    // Calcula la deuda del usuario
     // La deuda se calcula restando el total de gastos del usuario del promedio de gastos
     const totalGastadoPorUsuario = obtenerTotalGastado(usuario);
     const deudaDelUsuario = promedioGastosPorUsuario - totalGastadoPorUsuario;
 
-    return deudaDelUsuario; // Devolver la deuda calculada
+    return deudaDelUsuario; // Devuelve la deuda calculada
 }
 
 
-// Inicializar la aplicación al cargar el DOM
+// Inicializa la aplicación al cargar el DOM
 document.addEventListener('DOMContentLoaded', crearFormulario);
